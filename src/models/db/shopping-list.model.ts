@@ -9,7 +9,5 @@ export class MShoppingList {
     open = true;
     products: IProduct[] = [];
 
-    constructor(name: string) {
-        this.name = name;
-    }
+    constructor() {}
 }
