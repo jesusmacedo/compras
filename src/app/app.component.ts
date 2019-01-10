@@ -3,8 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { auth } from 'firebase';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { MTest } from 'src/models/db/test.model';
+import { MShoppingList } from 'src/models/db/shopping-list.model';
+import { FirebaseService } from 'src/services/firebase/firebase.service';
 
 @Component({
     selector: 'compras-root',
@@ -14,16 +14,20 @@ import { MTest } from 'src/models/db/test.model';
 export class AppComponent implements OnInit {
     title = 'compras';
     // ! ONLY for testing purposes
-    item: MTest;
+    item: MShoppingList;
     testModelCollection: AngularFirestoreCollection<any>;
-    list: Observable<MTest[]>;
+    list: Observable<MShoppingList[]>;
 
     /**
      * Create a new `AngularFirestoreCollection`.
      * @param afs collection instance.
      */
-    constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth) {
-        this.testModelCollection = afs.collection<MTest>('MTest');
+    constructor(
+        private afs: AngularFirestore,
+        private afAuth: AngularFireAuth,
+        private firebaseService: FirebaseService
+    ) {
+        this.testModelCollection = afs.collection<MShoppingList>('listas');
     }
 
     // * Angular Lifecycle
@@ -32,20 +36,9 @@ export class AppComponent implements OnInit {
      * Get all previously-saved objects.
      */
     ngOnInit() {
-        this.item = { name: '' };
+        this.item = new MShoppingList();
 
-        this.list = this.testModelCollection.snapshotChanges().pipe(
-            map(actions =>
-                actions.map(a => {
-                    const data = a.payload.doc.data() as MTest;
-                    console.log(data);
-                    const id = a.payload.doc.id;
-                    console.log(id);
-
-                    return { id, ...data };
-                })
-            )
-        );
+        this.list = this.firebaseService.getListsCollection();
     }
 
     // * User Interaction
@@ -65,6 +58,6 @@ export class AppComponent implements OnInit {
     didPressSave(): void {
         this.testModelCollection.add(this.item);
 
-        this.item = {};
+        this.item = new MShoppingList();
     }
 }
