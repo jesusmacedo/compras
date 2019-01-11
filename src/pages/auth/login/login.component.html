@@ -10,7 +10,7 @@
             <h5 class="card-title">{{ 'AUTH.CARD_TITLE' | translate }}</h5>
             <p class="card-text">{{ 'AUTH.CARD_TEXT' | translate }}</p>
 
-            <a id="auth-button" class="btn btn-block btn-social btn-google">
+            <a id="auth-button" class="btn btn-block btn-social btn-google" (click)="didPressGoogle()">
                 <span class="fa"></span> {{ 'AUTH.BUTTON_GOOGLE' | translate }}
             </a>
         </div>
