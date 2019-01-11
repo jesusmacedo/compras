@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { TranslateService } from '@ngx-translate/core';
 import { auth } from 'firebase';
 import { Observable } from 'rxjs';
 import { MShoppingList } from 'src/models/db/shopping-list.model';
@@ -23,10 +24,17 @@ export class AppComponent implements OnInit {
      * @param afs collection instance.
      */
     constructor(
+        private translate: TranslateService,
         private afs: AngularFirestore,
         private afAuth: AngularFireAuth,
         private firebaseService: FirebaseService
     ) {
+        // * this language will be used as a fallback when a translation isn't found in the current language
+        this.translate.setDefaultLang('es');
+
+        // the lang to use, if the lang isn't available, it will use the current loader to get them
+        this.translate.use('es');
+
         this.testModelCollection = afs.collection<MShoppingList>('listas');
     }
 
