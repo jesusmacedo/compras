@@ -1,3 +1,8 @@
 {
-
+    "APP_NAME": "Shooping Lists",
+    "AUTH": {
+        "CARD_TITLE": "INICIA SESIÓN",
+        "CARD_TEXT": "No volveras a olvidar un artículo en tu siguiente viaje al centro comercial.",
+        "BUTTON_GOOGLE": "Continuar con Google"
+    }
 }

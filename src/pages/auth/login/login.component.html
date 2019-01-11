@@ -1,17 +1,17 @@
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <img src="/assets/images/bag.svg" width="30" height="30" class="d-inline-block align-top" alt="" /> Shooping
-        Lists
+    <a class="navbar-brand">
+        <img src="/assets/images/bag.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
+        {{ 'APP_NAME' | translate }}
     </a>
 </nav>
 <div class="container">
     <div class="card" style="width: 18rem; margin: auto; border: none;">
         <div class="card-body">
-            <h5 class="card-title">Sign In</h5>
-            <p class="card-text">You won't miss a thing in your next trip to the mall.</p>
+            <h5 class="card-title">{{ 'AUTH.CARD_TITLE' | translate }}</h5>
+            <p class="card-text">{{ 'AUTH.CARD_TEXT' | translate }}</p>
 
-            <a style="color: white" class="btn btn-block btn-social btn-google">
-                <span class="fa fa-google"></span> Sign in with Google
+            <a id="auth-button" class="btn btn-block btn-social btn-google">
+                <span class="fa"></span> {{ 'AUTH.BUTTON_GOOGLE' | translate }}
             </a>
         </div>
     </div>
